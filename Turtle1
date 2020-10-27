@@ -1,0 +1,88 @@
+#INSTRUCOES
+#codigo feito no repl.it, no seguinte link https://repl.it/languages/pygame
+#precione space algumas vezes, a tartaruga representada pelo retangulo vermelho se movera num caminho predeterminado ate a minhoca representada pelo retangulo amarelo
+#quando a tartaruga chegar na minhoca o jogo fechara
+#FIM DAS INSTRUCOES
+
+
+# import pygame module in this program  
+import pygame 
+  
+# activate the pygame library .   
+# initiate pygame and give permission   
+# to use pygame's functionality.   
+pygame.init() 
+  
+# create the display surface object   
+# of specific dimension..e(500, 500).   
+win = pygame.display.set_mode((500, 500)) 
+  
+# set the pygame window name  
+pygame.display.set_caption("Starting red turtle") 
+  
+# object current co-ordinates  
+x = 255
+y = 255
+w = 455
+z = 455
+  
+# dimensions of the object  
+width = 20
+height = 20
+margin = 5
+  
+# velocity / speed of movement 
+vel = 25
+  
+# Indicates pygame is running 
+run = True
+  
+# infinite loop  
+while run: 
+    # creates time delay of 10ms  
+    pygame.time.delay(50) 
+      
+    # iterate over the list of Event objects   
+    # that was returned by pygame.event.get() method.   
+    for event in pygame.event.get(): 
+          
+        # if event object type is QUIT   
+        # then quitting the pygame   
+        # and program both.   
+        if event.type == pygame.QUIT: 
+              
+            # it will make exit the while loop  
+            run = False
+    # stores keys pressed  
+    keys = pygame.key.get_pressed() 
+      
+    # if space key is pressed 
+    if keys[pygame.K_SPACE]: 
+          
+        # decrement in x co-ordinate 
+        x += vel
+        y += vel 
+         
+              
+    # completely fill the surface object   
+    # with black colour   
+    win.fill((0, 0, 0)) 
+    # grid creator
+    for column in range(0+margin, 500, width+margin):
+        for row in range(0+margin, 500, height+margin):
+            pygame.draw.rect(win, (255, 255, 255), [column,row,width,height])
+
+      
+    # drawing object on screen which is rectangle here  
+    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height)) 
+
+    pygame.draw.rect(win, (255, 255, 0), (w, z, width, height))
+
+    if x & y == w & z:
+      pygame.quit()
+      
+    # it refreshes the window 
+    pygame.display.update() 
+  
+# closes the pygame window  
+pygame.quit() 
